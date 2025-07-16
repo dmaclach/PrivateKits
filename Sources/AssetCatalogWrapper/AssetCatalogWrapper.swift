@@ -295,7 +295,8 @@ public class Rendition: Hashable {
     public enum Representation: Hashable {
         case color(CGColor)
         case image(CGImage)
-        
+        case rawData(Data)
+
         #if canImport(UIKit)
         public var uiView: UIView {
             var view = UIView()
@@ -331,6 +332,8 @@ public class Rendition: Hashable {
                 self = .color(cgColor)
             } else if let image = rendition.image {
                 self = .image(image)
+            } else if let data = rendition.cuiRend.data() {
+                self = .rawData(data)
             } else {
                 return nil
             }
@@ -543,6 +546,8 @@ public extension CUICatalog {
             guard keyStore.setAsset(csiRepresentation, forKey: keyData) else {
                 throw _Errors.failedToEditItem(description: "Failed to set new data for asset.")
             }
+        default:
+            assertionFailure("Editing Not Supported")
         }
         
         return keyStore
