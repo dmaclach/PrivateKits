@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, CUIBitmapEncoding) {
 - (bool)isInternalLink;
 - (CUIRenditionKey *)linkingToRendition;
 #if HAS_CORE_SVG
-- (CGSVGDocumentRef)svgDocument;
+- (CGSVGDocumentRef _Nullable)svgDocument;
 #endif
 - (struct CGRect)_destinationFrame;
 - (CGImageRef _Nullable)uncroppedImage;
@@ -72,8 +72,7 @@ typedef NS_ENUM(NSInteger, CUIBitmapEncoding) {
 - (bool)substituteWithSystemColor;
 - (NSString *)systemColorName;
 - (CGImageRef)createImageFromPDFRenditionWithScale:(double)arg1;
-- (CGPDFDocumentRef)pdfDocument;
-- (struct CGRect)_destinationFrame;
+- (CGPDFDocumentRef _Nullable)pdfDocument;
 - (struct CGSize)unslicedSize;
 - (_Nonnull id)initWithCSIData:(NSData *)arg1 forKey:(const struct renditionkeytoken *)arg2;
 - (_Nullable id)initWithCSIData:(NSData *)csidata forKey:(const struct renditionkeytoken *)key version:(unsigned int)version;

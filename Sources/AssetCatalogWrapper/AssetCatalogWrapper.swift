@@ -150,9 +150,13 @@ public class Rendition: Hashable {
         case .pdf:
             return cuiRend.createImageFromPDFRendition(withScale: _getScreenScale())?.takeUnretainedValue()
         case .svg:
-            let document = SVGDocument(doc: cuiRend.svgDocument())
-            document.destroyUponDeinitialization = false
-            return document.cgImage()
+            if let svgDocument = cuiRend.svgDocument() {
+                let document = SVGDocument(doc: svgDocument)
+                document.destroyUponDeinitialization = false
+                return document.cgImage()
+            }
+            return nil
+
         default:
             return nil
         }
