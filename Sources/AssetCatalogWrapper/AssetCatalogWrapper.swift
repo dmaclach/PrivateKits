@@ -436,13 +436,15 @@ public extension CUICatalog {
                 dict[rend.type] = [rend]
             }
         }
-        
+
         var arr = RenditionCollection()
         for (key, value) in dict {
-            arr.append((key, value))
+            // sort Renditions in Alphabetical order
+            let sorted = value.sorted { first, second in first.name < second.name }
+            arr.append((key, sorted))
         }
         
-        // sort by Alphabetical order
+        // sort Types in Alphabetical order
         arr = arr.sorted { first, second in
             return first.type.description < second.type.description
         }
